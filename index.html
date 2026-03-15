@@ -131,6 +131,24 @@
       <div class="ai-box-title">✦ Your personalised AI guidance</div>
       <div class="ai-box-text" id="aiText"><span class="ai-loading">Generating your profile...</span></div>
     </div>
+    <div class="profile-section" style="background:rgba(120,201,160,.06);border-color:rgba(120,201,160,.20)">
+      <div class="profile-section-title" style="color:var(--sage)">What to do next</div>
+      <div class="strategy-item">
+        <span class="strategy-num">⚡</span>
+        <div class="strategy-text">Use <strong>Spark</strong> when you need help starting a specific task right now.</div>
+      </div>
+      <div class="strategy-item">
+        <span class="strategy-num">🧩</span>
+        <div class="strategy-text">Use <strong>Clear Path</strong> when you're working on an assignment and need step-by-step academic support.</div>
+      </div>
+      <div class="strategy-item" style="border-bottom:none;padding-bottom:0">
+        <span class="strategy-num">🫶</span>
+        <div class="strategy-text">Consider booking an <strong>Academic Skills appointment</strong> — bring this profile with you if it helps.</div>
+      </div>
+    </div>
+    <div style="font-size:13px;color:var(--dim);text-align:center;line-height:1.6;padding:0 8px">
+      Your pattern can shift over time. Come back and retake this whenever something feels different.
+    </div>
     <div class="profile-btns">
       <button class="profile-btn primary" onclick="startQuiz()">Take it again</button>
       <button class="profile-btn secondary" onclick="goHome()">Back to home</button>
@@ -227,6 +245,30 @@ const QUESTIONS=[
     {i:'📦',t:"I finish but then forget to submit or do the final step",tags:['follow-through','adhd','executive-function']},
     {i:'🔚',t:"The last 10% is hardest — I lose interest near the end",tags:['novelty-seeking','adhd']},
     {i:'✅',t:"Finishing isn't my problem — starting is",tags:['completion-ok','initiation-hard']}
+  ]},
+  {cat:'Working Memory',text:"In the middle of doing something, what tends to happen?",hint:'Working memory is like your brain's sticky note — ND brains often have smaller ones.',opts:[
+    {i:'💨',t:"I forget what I was doing mid-task — like my train of thought just vanishes",tags:['working-memory','adhd','executive-function']},
+    {i:'🔀',t:"I lose my place when I get interrupted and can't get back",tags:['working-memory','adhd','interruption-sensitive']},
+    {i:'📝',t:"I have to write everything down or I'll forget it immediately",tags:['working-memory','compensating']},
+    {i:'🧠',t:"My memory is pretty reliable — this isn't a big issue for me",tags:['memory-ok']}
+  ]},
+  {cat:'Numbers & Maths',text:"When you deal with numbers, data, or calculations...",hint:'',opts:[
+    {i:'🌀',t:"Numbers feel chaotic — I mix them up, lose my place, make errors",tags:['dyscalculia','processing']},
+    {i:'⏱',t:"Time calculations and estimating are really hard for me",tags:['dyscalculia','time-blind']},
+    {i:'💸',t:"Managing money, budgets, or schedules stresses me out a lot",tags:['dyscalculia','executive-function']},
+    {i:'🔢',t:"Numbers and maths aren't a particular struggle for me",tags:['numbers-ok']}
+  ]},
+  {cat:'Sleep & Routine',text:"How does your sleep and daily routine affect you?",hint:'',opts:[
+    {i:'🌙',t:"My sleep is all over the place — it really affects how I function",tags:['sleep-disruption','adhd','autism']},
+    {i:'🔄',t:"Any change to my routine throws off my whole day",tags:['routine-dependent','autism','anxiety']},
+    {i:'😴',t:"I'm almost always tired, no matter how much I sleep",tags:['fatigue','burnout','sleep-disruption']},
+    {i:'☀️',t:"Sleep and routine aren't major issues for me",tags:['routine-ok']}
+  ]},
+  {cat:'Masking & the Cost of it',text:"How much energy do you spend trying to seem 'normal' or holding yourself together in public?",hint:'Masking means hiding how you really think or feel to fit in. It is exhausting.',opts:[
+    {i:'🎭',t:"A lot — I perform all day and crash when I get home",tags:['masking','autism','burnout','exhaustion']},
+    {i:'😶',t:"I hold a lot in — emotions, needs, confusion — and it builds up",tags:['masking','suppression','shutdown']},
+    {i:'🤔',t:"I'm not sure — I've done it so long I don't know what's real anymore",tags:['masking','identity','autism']},
+    {i:'😌',t:"I don't really feel like I have to mask — I can be myself",tags:['low-masking']}
   ]}
 ];
 
@@ -252,7 +294,14 @@ const STRAT_MAP={
   'fatigue':['Cognitive rest is different from physical rest. Screens do not rest your brain — try walking, music, or silence.','On low-energy days, one important thing done is a success. Stop trying to do everything.'],
   'completion-difficulty':['Use a closing ritual — at the end of each session write what you did and exactly what is next. This bridges sessions.','Pair submission with something enjoyable immediately after. Train your brain to associate finishing with reward.'],
   'follow-through':['Create an external system for final steps — a checklist pinned somewhere visible, not just in your head.','Ask someone to check in with you at submission time. Accountability bridges the gap executive function leaves.'],
-  'emotional-intensity':['Your emotional intensity is not a character flaw — it often comes with genuine empathy and deep engagement.','When emotions spike, name them before acting: "This is disappointment." Naming activates the thinking brain.']
+  'emotional-intensity':['Your emotional intensity is not a character flaw — it often comes with genuine empathy and deep engagement.','When emotions spike, name them before acting: "This is disappointment." Naming activates the thinking brain.'],
+  'working-memory':['Externalise everything — write it down the moment you think it. Your brain is not broken; it just needs a better filing system outside your head.','Before switching tasks, write a one-line note: "I was doing X, next step is Y." This bridges the gap when you come back.'],
+  'dyscalculia':['Use visual tools for numbers — calendars, timelines, colour-coded budgets. Pictures of time and money are easier to process than abstract numbers.','Always double-check number-based tasks with a calculator or a trusted person. This is not a weakness — it is smart strategy.'],
+  'sleep-disruption':['Protect your sleep environment like a priority, not a luxury. Even one hour more makes a measurable difference to focus and emotional regulation.','If routine keeps breaking down, design the smallest possible consistent anchor: one thing at the same time each day.'],
+  'routine-dependent':['Build predictable rituals around work — same place, same signal, same starting sequence. Your brain needs to know what is coming.','When disruption happens, name it explicitly: "My routine broke today." Then choose one small anchor to re-establish it.'],
+  'masking':['Masking costs enormous energy that could go toward thinking and learning. Find one safe space — physical or relational — where you do not have to perform.','Consider disclosing to one trusted person — a lecturer, advisor, or friend. You do not owe anyone your full story, but having one ally changes things.'],
+  'suppression':['What you suppress does not disappear — it builds up. Even 5 minutes of journalling, voice-memo, or movement can act as a pressure valve.','Name the thing you are suppressing before entering a difficult situation. Naming it gives you just enough distance to manage it.'],
+  'compensating':['Your compensating strategies — lists, reminders, systems — are not crutches. They are exactly how your brain works best. Build on them, do not apologise for them.']
 };
 
 const DESCRIPTIONS={
@@ -261,11 +310,14 @@ const DESCRIPTIONS={
   perfectionism:'Your standards are high because you care deeply. But perfectionism often protects you from the vulnerability of being seen and judged. The work is good enough.',
   autism:'You experience the world with intensity and precision. Sensory input, social energy, and unpredictability cost you more than they cost others. That is real, not an exaggeration.',
   anxiety:'Your nervous system is running on high alert. It is trying to protect you — but it often mistakes academic challenge for actual danger.',
-  burnout:'You have been working hard for a long time, often without the accommodations your brain genuinely needs. Rest is not giving up. It is necessary maintenance.'
+  burnout:'You have been working hard for a long time, often without the accommodations your brain genuinely needs. Rest is not giving up. It is necessary maintenance.',
+  masking:'You are spending enormous energy making yourself appear to function in ways that do not come naturally. That energy is real, and it is being spent on performance instead of learning. You deserve spaces where you do not have to perform.',
+  working_memory:'Your working memory works differently — not worse, differently. Most strategies that work for ND brains involve getting things out of your head and into a system. That is not a weakness. It is the strategy.',
+  dyscalculia:'Numbers, time, and data processing can work differently in ND brains. This often goes unrecognised because people assume it is just "being bad at maths." It is a real processing difference, and there are real workarounds.'
 };
 
 const CHIP_COLS=['chip-coral','chip-amber','chip-sage','chip-sky','chip-lav'];
-const CHIP_LABELS={'adhd':'ADHD tendencies','hyperfocus':'Hyperfocus','distractible':'Distractible','dyslexia':'Dyslexic processing','visual-learner':'Visual learner','auditory':'Auditory learner','task-initiation':'Task initiation','procrastination':'Procrastination','perfectionism':'Perfectionism','fear-of-failure':'Fear of failure','time-blind':'Time blindness','now-not-now':'Now/not-now thinking','autism':'Autistic traits','masking':'Masking','rejection-sensitive':'Rejection sensitivity','sensory-overwhelm':'Sensory sensitivity','burnout':'Burnout','boom-bust':'Boom and bust energy','shutdown':'Shutdown tendency','executive-function':'Executive function','completion-difficulty':'Completion challenges','anxiety':'Anxiety','urgency-driven':'Urgency-driven','writing-difficulty':'Writing challenges','emotional-intensity':'Emotional intensity','follow-through':'Follow-through gaps'};
+const CHIP_LABELS={'adhd':'ADHD tendencies','hyperfocus':'Hyperfocus','distractible':'Distractible','dyslexia':'Dyslexic processing','visual-learner':'Visual learner','auditory':'Auditory learner','task-initiation':'Task initiation','procrastination':'Procrastination','perfectionism':'Perfectionism','fear-of-failure':'Fear of failure','time-blind':'Time blindness','now-not-now':'Now/not-now thinking','autism':'Autistic traits','masking':'Masking','rejection-sensitive':'Rejection sensitivity','sensory-overwhelm':'Sensory sensitivity','burnout':'Burnout','boom-bust':'Boom and bust energy','shutdown':'Shutdown tendency','executive-function':'Executive function','completion-difficulty':'Completion challenges','anxiety':'Anxiety','urgency-driven':'Urgency-driven','writing-difficulty':'Writing challenges','emotional-intensity':'Emotional intensity','follow-through':'Follow-through gaps','working-memory':'Working memory challenges','dyscalculia':'Dyscalculia','sleep-disruption':'Sleep disruption','routine-dependent':'Routine dependent','masking':'Masking','suppression':'Suppression & holding in','compensating':'Compensating strategies','exhaustion':'Masking exhaustion'};
 
 let currentQ=0,answers=[],allTags=[];
 
@@ -335,6 +387,9 @@ function buildProfile(){
   if(nPerf>2)ptext+=DESCRIPTIONS.perfectionism+'\n\n';
   if(nAutism>2)ptext+=DESCRIPTIONS.autism+'\n\n';
   if(allTags.includes('burnout')||allTags.includes('fatigue'))ptext+=DESCRIPTIONS.burnout+'\n\n';
+  if(allTags.includes('masking')||allTags.includes('exhaustion'))ptext+=DESCRIPTIONS.masking+'\n\n';
+  if(allTags.includes('working-memory'))ptext+=DESCRIPTIONS.working_memory+'\n\n';
+  if(allTags.includes('dyscalculia'))ptext+=DESCRIPTIONS.dyscalculia+'\n\n';
   if(!ptext)ptext='Your answers show a mixed pattern — which is completely normal. Neurodivergent brains rarely fit one neat category. What matters is finding what actually works for you.';
   document.getElementById('profileText').textContent=ptext.trim();
   // Strategies
@@ -359,7 +414,7 @@ function buildProfile(){
 async function callAI(key){
   const summary=answers.map(a=>'Q: '+a.q+'\nA: '+a.a).join('\n\n');
   const sys='You are a warm, knowledgeable academic skills advisor specialising in neurodivergent students. Plain language only. No clinical jargon. Non-judgmental, specific, and practical. Write in second person.';
-  const prompt='Based on these quiz answers, write a personalised 3-4 sentence profile of how this student\'s brain works, then 2-3 specific strategies tailored exactly to their pattern. Warm, honest, practical. Flowing prose, no bullet points.\n\n'+summary;
+  const prompt='Based on these quiz answers from a student, do three things:\n1. Write a warm, honest 4-5 sentence profile of how their brain works — what is actually going on neurologically, not just a list of traits. Be specific to their combination of answers.\n2. Identify the single most important thing they should focus on first, and explain why in 1-2 sentences.\n3. Give 2-3 highly specific strategies tailored exactly to their pattern — not generic tips.\nFlowing prose throughout. No bullet points. No clinical language. Second person (you/your).\n\n'+summary;
   try{
     const res=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',
       headers:{'Content-Type':'application/json','x-api-key':key,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},
